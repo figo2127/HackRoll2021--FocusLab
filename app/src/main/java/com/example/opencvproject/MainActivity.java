@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.media.FaceDetector;
@@ -175,6 +177,19 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 dailyDuration += timeInterval;
                 Log.e(null, String.format("Session duration: %s", dailyDuration));
                 saveDuration();
+
+                Date date = new Date();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                String sdate = df.format(date);
+
+                try {
+                    Date date2=df.parse(sdate);
+                    insertData(date2, dailyDuration);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -201,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     }
 
     //MYSQL : START
-    public void insertData(Date date, Float TimeFocused) {
+    public void insertData(Date date, long TimeFocused) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.COL0, DateToDays(date));
         contentValues.put(DatabaseHelper.COL1, TimeFocused);
@@ -213,6 +228,24 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         String strDate = dateFormat.format(date);
         return db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.COL0 + "=?", new String[]{strDate}) > 0;
         //returns true if deletion successful
+    }
+
+    public long retrieveData(Date id) {
+
+        String res = "not found";
+        String whereclause = "ID=?";
+        String[] whereargs = new String[]{String.valueOf(id)};
+        Cursor csr = db.query(DatabaseHelper.TABLE_NAME,null,whereclause,whereargs,null,null,null);
+        if (csr.moveToFirst()) {
+            res = csr.getString(csr.getColumnIndex(DatabaseHelper.COL1));
+        }
+
+        if(res == "not found"){
+           return -1;
+        }
+        else{
+            return Long.parseLong(res);
+        }
     }
 
     public boolean updateData(Date date, Float TimeFocused) {
@@ -244,13 +277,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         return new Date(currentTime);
     }
     //MYSQL : END
-
-
-
-
-
-
-
 
 
     private boolean checkPermission() {
