@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 Date date = new Date();
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String sdate = df.format(date);
+                db = openHelper.getWritableDatabase();
 
                 try {
                     Date date2=df.parse(sdate);
@@ -221,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         contentValues.put(DatabaseHelper.COL0, DateToDays(date));
         contentValues.put(DatabaseHelper.COL1, TimeFocused);
         long id = db.insert(DatabaseHelper.TABLE_NAME, null, contentValues);
+        Log.e("return code is : ", String.valueOf(id));
     }
 
     public boolean deleteData(Date date) {
@@ -241,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
 
         if(res == "not found"){
-           return -1;
+            return -1;
         }
         else{
             return Long.parseLong(res);
@@ -259,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     }
 
 
-        // magic number=
+    // magic number=
     // millisec * sec * min * hours
     // 1000 * 60 * 60 * 24 = 86400000
     public static final long MAGIC=86400000L;
@@ -595,6 +597,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
     };
 }
+
 
 
 
