@@ -35,7 +35,7 @@
         android:layout_marginBottom="327dp"
         android:gravity="left"
         android:rotation="270"
-        android:text="Seconds "
+        android:text="Hours"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView

@@ -60,7 +60,7 @@ public class Statistic extends AppCompatActivity {
             }
             else{
                 String value = cursorData.getString(cursorData.getColumnIndex("TimeFocused"));
-                 dp = new DataPoint(i-1, Integer.parseInt(value));
+                 dp = new DataPoint(i-1, (Integer.parseInt(value)/60));
             }
             series.appendData(dp,true,7);
         }
