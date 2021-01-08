@@ -34,13 +34,11 @@ public class Statistic extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
         setContentView(R.layout.stats_activity);
 
         DB = new DatabaseHelper(this);
 
         Calendar cal = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
@@ -52,13 +50,14 @@ public class Statistic extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
             DataPoint dp;
-            Cursor cursorData = DB.retrieveData(df.format(cal.getTime()));
+            boolean checkCursor = DB.checkCursor(df.format(cal.getTime()));
             Log.e("current date: ", df.format(cal.getTime()));
 
-            if(cursorData.getCount() <= 0) {
+            if(!checkCursor) {
                 dp = new DataPoint(i-1, 0);
             }
             else{
+                Cursor cursorData = DB.retrieveData(df.format(cal.getTime()));
                 String value = cursorData.getString(cursorData.getColumnIndex("TimeFocused"));
                  dp = new DataPoint(i-1, (Integer.parseInt(value)/60));
             }
