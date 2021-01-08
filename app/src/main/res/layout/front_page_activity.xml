@@ -54,7 +54,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="198dp"
         android:layout_marginEnd="87dp"
-        app:srcCompat="@drawable/study" />
+        app:srcCompat="@drawable/studying" />
 
 </RelativeLayout>
 
