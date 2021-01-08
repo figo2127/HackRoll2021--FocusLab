@@ -8,7 +8,7 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
-        android:layout_width="350dp"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -25,17 +25,17 @@
         android:text="back " />
 
     <TextView
-        android:id="@+id/hoursTextView"
+        android:id="@+id/secondsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="-4dp"
-        android:layout_marginBottom="293dp"
+        android:layout_marginBottom="327dp"
         android:gravity="left"
         android:rotation="270"
-        android:text="Hours "
+        android:text="Seconds "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_marginStart="191dp"
         android:layout_marginBottom="7dp"
         android:text="Days"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/textView4"
@@ -57,20 +57,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="46dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="26dp"
         android:text="Weekly Amount Of Focus Time"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:text="Switch" />
 
 
 </RelativeLayout>
