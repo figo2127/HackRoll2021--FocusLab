@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,11 +32,14 @@ import org.opencv.objdetect.CascadeClassifier;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.media.FaceDetector;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,7 +100,16 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private long mEndTime;
 
 
-    DatabaseHelper mDatabaseHelper;
+    SQLiteOpenHelper openHelper;
+    SQLiteDatabase db;
+
+
+    // to insert data: Steps below
+    // 1) db = openHelper.getWritableDatabase(); <-- you need this before u can call insertData
+    // 2) call insertData(Date date, Float TimeFocused)
+    // 3) Toast.makeText(getApplicationContext(), "INSERTED SUCCESSFULLY", Toast.LENGTH_LONG).show();
+
+    // to look at data inside db, click on bottom right Device File Explorer -> data -> look for .db file associated to this project, after u created the db.
 
 
     @Override
@@ -104,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDatabaseHelper = new DatabaseHelper(this);
+        //Setup DB
+        openHelper = new DatabaseHelper(this);
 
         this.getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -186,21 +200,58 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
     }
 
-
-
-    private void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
-        if (insertData) {
-            toastMessage("Data successfully inserted");
-        } else {
-            toastMessage("Something went Wrong");
-        }
-
+    //MYSQL : START
+    public void insertData(Date date, Float TimeFocused) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.COL0, DateToDays(date));
+        contentValues.put(DatabaseHelper.COL1, TimeFocused);
+        long id = db.insert(DatabaseHelper.TABLE_NAME, null, contentValues);
     }
 
-    private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public boolean deleteData(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        return db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.COL0 + "=?", new String[]{strDate}) > 0;
+        //returns true if deletion successful
     }
+
+    public boolean updateData(Date date, Float TimeFocused) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.COL0, DateToDays(date));
+        contentValues.put(DatabaseHelper.COL1, TimeFocused);
+        //get the date then convert it to String before u can update/delete
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        return db.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper.COL0 + "=?", new String[]{strDate}) > 0;
+    }
+
+
+        // magic number=
+    // millisec * sec * min * hours
+    // 1000 * 60 * 60 * 24 = 86400000
+    public static final long MAGIC=86400000L;
+
+    public int DateToDays (Date date){
+        //  convert a date to an integer and back again
+        long currentTime=date.getTime();
+        currentTime=currentTime/MAGIC;
+        return (int) currentTime;
+    }
+
+    public Date DaysToDate(int days) {
+        //  convert integer back again to a date
+        long currentTime=(long) days*MAGIC;
+        return new Date(currentTime);
+    }
+    //MYSQL : END
+
+
+
+
+
+
+
+
 
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
