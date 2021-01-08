@@ -98,13 +98,13 @@ public class FaceEyeDetector implements Detector {
             MatOfRect eyes = new MatOfRect();
             eyeClassifier.detectMultiScale(frameCaptured, eyes);
 
-            for (Rect rect : eyes.toArray()) {
-                Imgproc.putText(frameCaptured, "Eye", new Point(rect.x,rect.y-5),
-                        1, 2, new Scalar(0,255,0));
-                Imgproc.rectangle(frameCaptured, new Point(rect.x, rect.y),
-                        new Point(rect.x + rect.width, rect.y + rect.height),
-                        new Scalar(200, 200, 100),1);
-            }
+//            for (Rect rect : eyes.toArray()) {
+//                Imgproc.putText(frameCaptured, "Eye", new Point(rect.x,rect.y-5),
+//                        1, 2, new Scalar(0,255,0));
+//                Imgproc.rectangle(frameCaptured, new Point(rect.x, rect.y),
+//                        new Point(rect.x + rect.width, rect.y + rect.height),
+//                        new Scalar(200, 200, 100),1);
+//            }
 
 //            System.out.println(String.format("%s faces, %s eyes detected.",
 //                    faces.toArray().length,eyes.toArray().length));
