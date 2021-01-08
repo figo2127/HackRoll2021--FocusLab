@@ -99,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor retrieveData(String date) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("SELECT * FROM " + TABLE_NAME +"  WHERE date = ?", new String[]{date});
+        cursor.moveToFirst();
         return cursor;
     }
 
