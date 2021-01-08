@@ -211,11 +211,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String sdate = df.format(date);
 
-                Cursor entriesData = DB.retrieveData(sdate);
-                if(entriesData.getCount()<=0){
+                boolean cursorC = DB.checkCursor(sdate);
+                if(!cursorC){
                     DB.insertUserData(sdate, Long.toString(dailyDuration));
                 }
                 else{
+                    Cursor entriesData = DB.retrieveData(sdate);
                     long currentTimeFocused = Long.parseLong(entriesData.getString(1)) + dailyDuration;
                     DB.updateUserData(sdate, Long.toString(currentTimeFocused));
                 }

@@ -86,10 +86,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean checkCursor(String date) {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("SELECT * FROM " + TABLE_NAME +"  WHERE date = ?", new String[]{date});
+        if(cursor == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     public Cursor retrieveData(String date) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("SELECT * FROM " + TABLE_NAME +"  WHERE date = ?", new String[]{date});
         return cursor;
     }
+
 
 }
