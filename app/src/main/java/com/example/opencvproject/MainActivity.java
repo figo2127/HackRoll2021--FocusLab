@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         });
 
         //Setup DB
-        DB = new DatabaseHelper(this);
 
         this.getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -202,20 +201,16 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String sdate = df.format(date);
 
-                try {
-                    Date date2=df.parse(sdate);
-                    Log.e(null, String.format("%s", date2.toString() instanceof String));
-                    Log.e(null, String.format("%s", Long.toString(dailyDuration) instanceof String));
-                    Boolean checkInsertData =  DB.insertUserData(date2.toString(), Long.toString(dailyDuration));
-                    if(checkInsertData == true) {
-                        Toast.makeText(MainActivity.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-                    } else
-                        Toast.makeText(MainActivity.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                boolean cursorC = DB.checkCursor(sdate);
+                if(!cursorC){
+                    DB.insertUserData(sdate, Long.toString(dailyDuration));
                 }
-
+                else{
+                    Cursor entriesData = DB.retrieveData(sdate);
+                    String value = entriesData.getString(entriesData.getColumnIndex("TimeFocused"));
+                    long currentTimeFocused = Long.parseLong(value) + dailyDuration;
+                    DB.updateUserData(sdate, Long.toString(currentTimeFocused));
+                }
             }
         });
 
@@ -622,15 +617,3 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
