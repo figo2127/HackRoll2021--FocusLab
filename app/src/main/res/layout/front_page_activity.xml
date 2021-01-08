@@ -17,9 +17,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="100dp"
         android:layout_marginBottom="300dp"
         android:text="Click here to start"
+
         android:textColor="#FFFFFF"
         android:background="@drawable/custom_button"/>
 
@@ -30,7 +31,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="100dp"
         android:layout_marginBottom="220dp"
         android:textColor="#FFFFFF"
         android:background="@drawable/custom_button"
