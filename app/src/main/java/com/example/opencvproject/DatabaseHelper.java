@@ -89,11 +89,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean checkCursor(String date) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("SELECT * FROM " + TABLE_NAME +"  WHERE date = ?", new String[]{date});
-        if(cursor == null){
-            return false;
+        if(cursor.getCount()>0){
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
     public Cursor retrieveData(String date) {
