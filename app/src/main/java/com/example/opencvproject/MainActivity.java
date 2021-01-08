@@ -42,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.FaceDetector;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -62,12 +63,14 @@ import android.view.SurfaceView;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.Loader;
@@ -106,9 +109,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     private VideoView mVideoView;
 
-
-    //    SQLiteOpenHelper openHelper;
-//    SQLiteDatabase db;
     DatabaseHelper DB;
 
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         //Setup DB
 
-        this.getSupportActionBar().hide();
+//        this.getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mEditTextInput = findViewById(R.id.edit_text_input);
