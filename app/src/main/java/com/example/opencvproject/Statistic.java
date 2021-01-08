@@ -80,6 +80,5 @@ public class Statistic extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }
