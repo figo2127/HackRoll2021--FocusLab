@@ -217,7 +217,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 }
                 else{
                     Cursor entriesData = DB.retrieveData(sdate);
-                    long currentTimeFocused = Long.parseLong(entriesData.getString(1)) + dailyDuration;
+                    String value = entriesData.getString(entriesData.getColumnIndex("TimeFocused"));
+                    long currentTimeFocused = Long.parseLong(value) + dailyDuration;
                     DB.updateUserData(sdate, Long.toString(currentTimeFocused));
                 }
             }

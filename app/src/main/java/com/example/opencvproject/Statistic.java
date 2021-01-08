@@ -59,7 +59,8 @@ public class Statistic extends AppCompatActivity {
                 dp = new DataPoint(i-1, 0);
             }
             else{
-                 dp = new DataPoint(i-1, Integer.parseInt(cursorData.getString(1)));
+                String value = cursorData.getString(cursorData.getColumnIndex("TimeFocused"));
+                 dp = new DataPoint(i-1, Integer.parseInt(value));
             }
             series.appendData(dp,true,7);
         }
