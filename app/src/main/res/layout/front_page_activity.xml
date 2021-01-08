@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".FrontPage">
+
+
+    <Button
+        android:id="@+id/open_activity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginBottom="398dp"
+        android:text="Click here to start" />
+
+    <Button
+        android:id="@+id/stats_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginBottom="330dp"
+        android:text="View Statistic" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="262dp"
+        android:layout_height="106dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="85dp"
+        android:text="Welcome To FocusLab"
+        android:textColor="#F44336"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="45dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="47dp"
+        android:layout_height="69dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="198dp"
+        android:layout_marginEnd="87dp"
+        app:srcCompat="@drawable/study" />
+
+</RelativeLayout>
+
+<!--<ScrollView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@drawable/abc"-->
+
+<!--    >-->
+
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" >-->
+
+<!--        <org.opencv.android.JavaCameraView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/color_blob_detection_activity_surface_view" />-->
+
+<!--    </FrameLayout>-->
+
+<!--</ScrollView>-->
