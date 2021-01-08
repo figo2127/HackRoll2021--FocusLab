@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String sdate = df.format(date);
 
-                Cursor entriesData = DB.getData(sdate);
+                Cursor entriesData = DB.retrieveData(sdate);
                 if(entriesData.getCount()<=0){
                     DB.insertUserData(sdate, Long.toString(dailyDuration));
                 }

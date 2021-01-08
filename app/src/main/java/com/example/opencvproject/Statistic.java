@@ -52,7 +52,7 @@ public class Statistic extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
             DataPoint dp;
-            Cursor cursorData = DB.getData(df.format(cal.getTime()));
+            Cursor cursorData = DB.retrieveData(df.format(cal.getTime()));
             Log.e("current date: ", df.format(cal.getTime()));
 
             if(cursorData.getCount() <= 0) {
