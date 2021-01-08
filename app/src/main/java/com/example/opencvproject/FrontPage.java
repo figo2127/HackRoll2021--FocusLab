@@ -1,10 +1,12 @@
 package com.example.opencvproject;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +15,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class FrontPage extends AppCompatActivity {
 
+    private RelativeLayout rootLayout;
+    private AnimationDrawable animDrawable;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.front_page_activity);
+
+        rootLayout = (RelativeLayout) findViewById(R.id.root_layout);
+        animDrawable = (AnimationDrawable) rootLayout.getBackground();
+        animDrawable.setEnterFadeDuration(10);
+        animDrawable.setExitFadeDuration(5000);
+        animDrawable.start();
         Log.e(null, String.format("Today's duration: %s", MainActivity.accessDuration("2021-01-07")));
 
         Button btn = findViewById(R.id.open_activity_button);

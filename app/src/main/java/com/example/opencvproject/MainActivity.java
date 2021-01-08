@@ -108,10 +108,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private long mEndTime;
 
     private VideoView mVideoView;
-    private RelativeLayout rootLayout;
-    private AnimationDrawable animDrawable;
-
-
 
     DatabaseHelper DB;
 
@@ -129,12 +125,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rootLayout = (RelativeLayout) findViewById(R.id.root_layout);
-        animDrawable = (AnimationDrawable) rootLayout.getBackground();
-        animDrawable.setEnterFadeDuration(10);
-        animDrawable.setExitFadeDuration(5000);
-        animDrawable.start();
-
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.study);
@@ -151,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         //Setup DB
 
-        this.getSupportActionBar().hide();
+//        this.getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mEditTextInput = findViewById(R.id.edit_text_input);
