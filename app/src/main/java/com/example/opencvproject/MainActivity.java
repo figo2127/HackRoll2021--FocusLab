@@ -108,9 +108,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private long mEndTime;
 
     private VideoView mVideoView;
+    MediaPlayer music;
 
-    DatabaseHelper DB;
+    DatabaseHelper DB = new DatabaseHelper(this);
 
+    private Button buttonStart;
+    private Button buttonPause;
 
     // to insert data: Steps below
     // 1) db = openHelper.getWritableDatabase(); <-- you need this before u can call insertData
@@ -126,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         setContentView(R.layout.activity_main);
 
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
-
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.study);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.lofi);
 
         mVideoView.setVideoURI(uri);
         mVideoView.start();
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 mediaPlayer.setLooping(true);
             }
         });
+
+        music = MediaPlayer.create(this, R.raw.sound);
 
         //Setup DB
 
@@ -189,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Button btn = findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, FrontPage.class);
-                MainActivity.this.startActivity(myIntent);
+                music.stop();
+                pauseTimer();
                 endTime = SystemClock.elapsedRealtime();
                 long timeInterval = (SystemClock.elapsedRealtime() - startTime) / 1000;
                 dailyDuration += timeInterval;
@@ -211,6 +215,26 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     long currentTimeFocused = Long.parseLong(value) + dailyDuration;
                     DB.updateUserData(sdate, Long.toString(currentTimeFocused));
                 }
+
+                Intent myIntent = new Intent(MainActivity.this, FrontPage.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        buttonStart = findViewById(R.id.start);
+        buttonPause = findViewById(R.id.pause);
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                music.start();
+            }
+        });
+
+        buttonPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                music.pause();
             }
         });
 

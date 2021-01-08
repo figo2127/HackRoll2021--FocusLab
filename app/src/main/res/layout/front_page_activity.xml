@@ -12,24 +12,29 @@
 
     <Button
         android:id="@+id/open_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="398dp"
-        android:text="Click here to start" />
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="300dp"
+        android:text="Click here to start"
+
+        android:textColor="#FFFFFF"
+        android:background="@drawable/custom_button"/>
 
     <Button
         android:id="@+id/stats_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="330dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="220dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/custom_button"
         android:text="View Statistic" />
 
     <TextView
@@ -54,7 +59,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="198dp"
         android:layout_marginEnd="87dp"
-        app:srcCompat="@drawable/study" />
+        app:srcCompat="@drawable/studying" />
 
 </RelativeLayout>
 
