@@ -1,6 +1,8 @@
 package com.example.opencvproject;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,6 +27,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Statistic extends AppCompatActivity {
+
+    SQLiteOpenHelper openHelper;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,7 @@ public class Statistic extends AppCompatActivity {
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+        db = openHelper.getWritableDatabase();
 
 
         for (int i = Calendar.MONDAY; i <= Calendar.SATURDAY; i++) {
