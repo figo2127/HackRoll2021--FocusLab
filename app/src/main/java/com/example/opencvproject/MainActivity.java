@@ -42,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.FaceDetector;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -62,12 +63,14 @@ import android.view.SurfaceView;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.Loader;
@@ -105,10 +108,11 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private long mEndTime;
 
     private VideoView mVideoView;
+    private RelativeLayout rootLayout;
+    private AnimationDrawable animDrawable;
 
 
-    //    SQLiteOpenHelper openHelper;
-//    SQLiteDatabase db;
+
     DatabaseHelper DB;
 
 
@@ -124,6 +128,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rootLayout = (RelativeLayout) findViewById(R.id.root_layout);
+        animDrawable = (AnimationDrawable) rootLayout.getBackground();
+        animDrawable.setEnterFadeDuration(10);
+        animDrawable.setExitFadeDuration(5000);
+        animDrawable.start();
 
         mVideoView = (VideoView) findViewById(R.id.bgVideoView);
 
