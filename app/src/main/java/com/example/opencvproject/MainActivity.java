@@ -194,7 +194,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 music.stop();
-                pauseTimer();
+                if (mTimerRunning) {
+                    pauseTimer();
+                }
                 endTime = SystemClock.elapsedRealtime();
                 long timeInterval = (SystemClock.elapsedRealtime() - startTime) / 1000;
                 dailyDuration += timeInterval;
